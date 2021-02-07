@@ -20,7 +20,7 @@
             style='color:#558596;'>y</span><span style='color:#779586;'>t</span><span style='color:#99A675;'>h</span><span
             style='color:#BBB665;'>o</span><span style='color:#DDC654;'>n</span></span>
     <br>
-    <p><a class="download" onclick="download()">Download</a></p>
+    <p><a class="download" onclick="downloadFile()">Download</a></p>
     
     <script>
         const queryString = new URLSearchParams(window.location.search);
@@ -40,7 +40,7 @@
                 document.getElementById('update').innerHTML = ``
             }
 
-            function download() {
+            function downloadFile() {
                 window.location.href = "/routinehub.py";
                 window.location.href = "/index.html?download=True";
             }
