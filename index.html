@@ -20,13 +20,13 @@
             style='color:#558596;'>y</span><span style='color:#779586;'>t</span><span style='color:#99A675;'>h</span><span
             style='color:#BBB665;'>o</span><span style='color:#DDC654;'>n</span></span>
     <br>
-    <p><a class="download" href="/routinebot.py" download>Download</a></p>
+    <p><a class="download" onclick="downloadFile()">Download</a></p>
     
     <script>
         const queryString = new URLSearchParams(window.location.search);
         const download = queryString.get('download');
         if (download) {
-            document.getElementById('thanks').innerHTML = `<h1>Thank you for downloading routinehub.py!</h1><p>Hope you like it!</p><hr>`
+            document.getElementById('thanks').innerHTML = `<h1>Thank you for downloading routinehub.py!</h1><p>Hope you like it!</p><hr><a href="/routinehub.py" download>`
         }
         else {
             document.getElementById('thanks').innerHTML = ``
@@ -38,6 +38,10 @@
             }
             else {
                 document.getElementById('update').innerHTML = ``
+            }
+
+            function downloadFile() {
+                window.location.href = "/index?download=True";
             }
     </script>
 </body>
