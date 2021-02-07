@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>routinehub.py</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="RoutineHub.py" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://routinehubpy.tk/i/routinehubpy.png" />
+    <meta property="og:description" content="RoutineHub in Python!" />
+    <meta property="theme-color" content="#000" />
+    <link rel="stylesheet" href="https://routinehubpy.tk/style.css" />
+</head>
+
+<body>
+    <p id="update"></p>
+    <p id="thanks"></p>
+    <h1>RoutineHub</h1>
+    <h2>In <span style='font-weight:bold;font-size:22px;'><span style='color:#3475A7;'>P</span><span
+            style='color:#558596;'>y</span><span style='color:#779586;'>t</span><span style='color:#99A675;'>h</span><span
+            style='color:#BBB665;'>o</span><span style='color:#DDC654;'>n</span></span>
+    <br>
+    <p><a class="download" href="/routinebot.py" download>Download</a></p>
+    
+    <script>
+        const queryString = new URLSearchParams(window.location.search);
+        const download = queryString.get('download');
+        if (download) {
+            document.getElementById('thanks').innerHTML = `<h1>Thank you for downloading routinehub.py!</h1><p>Hope you like it!</p><hr>`
+        }
+        else {
+            document.getElementById('thanks').innerHTML = ``
+        }
+
+        const update = queryString.get('update');
+            if (update) {
+                document.getElementById('update').innerHTML = `<a class="download" href="/routinebot.py" download>Download update</a><h2>You can delete the old file</h2><hr>`
+            }
+            else {
+                document.getElementById('update').innerHTML = ``
+            }
+    </script>
+</body>
+
+</html>
