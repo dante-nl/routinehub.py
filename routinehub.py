@@ -14,7 +14,7 @@ import sys
 import urllib
 import webbrowser
 
-version = "1.0"
+version = "1.0.1"
 
 def connected(host='http://google.com'):
     try:
@@ -41,7 +41,7 @@ data = r.json()
 if data.get('version') != version:
     print(f"A new version is ready to be downloaded! Here are the release notes: \n{data.get('notes')}")
     print(f"{version} -> {data.get('version')}")
-    txt = input("Do you want to visit the website to download the latest version (y/n): ")
+    txt = input("Do you want to visit the website to download the latest version (y to visit. anything else to continue): ")
     if details == True:
         print(f"> Input received as {txt}")
     if txt == "y":
@@ -49,17 +49,14 @@ if data.get('version') != version:
         webbrowser.open(url, new=1, autoraise=True)
         print(" ")
         sys.exit(1)
-    elif txt == "n":
-        print("Update not downloaded. Please come back with the latest version!")
+    else:
+        latestversion = "You are not on the latest version. Restart to update"
         print(" ")
-        sys.exit(1)
-    elif txt != "y" or "n":
-        print("That's not valid. Please enter 'y' or 'n'! It must be lowercase")
-        print(" ")
-        sys.exit(1)
+else:
+    latestversion = "You are on the latest version!"
 
 print(
-    f"Hi! Welcome to RoutineHub.py! | Type 'help' to get some help. ALL COMMANDS ARE LOWERCASE! | You are currently on the latest version ({version})")
+    f"Hi! Welcome to RoutineHub.py! | Type 'help' to get some help. ALL COMMANDS ARE LOWERCASE! | {latestversion}")
 def new_func():
     return
 
@@ -162,3 +159,6 @@ Average hearts: {heart_average}
     elif txt == "exit":
         print("Goodbye!")
         sys.exit(1)
+
+    else:
+        print("That is not a valid command!")
