@@ -26,7 +26,7 @@
         const queryString = new URLSearchParams(window.location.search);
         const download = queryString.get('download');
         if (download) {
-            document.getElementById('thanks').innerHTML = `<h1>Thank you for downloading routinehub.py!</h1><p>Hope you like it!</p><hr>`
+            document.getElementById('thanks').innerHTML = `<h1>Thank you for downloading routinehub.py!</h1><p>Hope you like it!</p><hr><a href="/routinehub.py">`
         }
         else {
             document.getElementById('thanks').innerHTML = ``
@@ -41,7 +41,6 @@
             }
 
             function downloadFile() {
-                window.location.href = "/routinehub.py";
                 window.location.href = "/index.html?download=True";
             }
     </script>
