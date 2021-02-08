@@ -1,4 +1,4 @@
 {
-	"version": "1.0.1",
-	"notes": "- You can now run the script without being on the latest version \n- You get an error now with an invalid command"
+	"version": "1.1",
+	"notes": "- Fixed Shortcuts count in the author section \n- Added elio27 to the credits"
 }
