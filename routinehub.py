@@ -42,9 +42,21 @@ data = r.json()
 if data.get('version') != version:
     print(f"A new version is ready to be downloaded! Here are the release notes: \n{data.get('notes')}")
     print(f"{version} -> {data.get('version')}")
-    txt = input("Do you want to visit the website to download the latest version (y to visit. anything else to continue): ")
+    txt = input("Do you want to download the latest version (y, anything else to continue): ")
     if details == True:
         print(f"> Input received as {txt}")
+        print("File will be downloaded in the current directory. You need to restart this file to run it.")
+        if details:
+            print("> Getting file...")
+        url = 'https://routinehubpy.tk/routinehub.py'
+        r = requests.get(url, allow_redirects=True)
+        if not r.ok:
+            print("Could not connect!")
+            sys.exit(1)
+        open('routinehub.py', 'wb').write(r.content)
+        print("Download complete")
+        sys.exit(1)
+
     if txt == "y":
         url = "https://routinehubpy.tk?update=True"
         webbrowser.open(url, new=1, autoraise=True)
@@ -71,6 +83,7 @@ Here are a few things that work with me:
 - 'shortcut' - Get a Shortcut's stats
 - 'author'   - Lookup an author
 - 'credits'  - Shows the credits
+- 'restore'  - Redownloads the current routinehub.py. Can be useful when you did an oopsie whilst editing it
 - 'exit'     - Stop this code
 """)
     elif txt == "shortcut":
@@ -179,6 +192,19 @@ Hearts: {hearts}
 - @alombi - Used his API for this script
 - @elio27 - Used parts of his RoutineBot code for the author part
 """)
+
+    elif txt == "restore":
+        print("File will be downloaded in the current directory. You need to restart this file to run it.")
+        if details:
+            print("> Getting file...")
+        url = 'https://routinehubpy.tk/routinehub.py'
+        r = requests.get(url, allow_redirects=True)
+        if not r.ok:
+            print("Could not connect!")
+            sys.exit(1)
+        open('routinehub.py', 'wb').write(r.content)
+        print("Download complete")
+        sys.exit(1)
 
     elif txt == "exit":
         print("Goodbye!")
