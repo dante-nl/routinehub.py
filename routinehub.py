@@ -58,7 +58,8 @@ if data.get('version') != version:
     open('routinehub.py', 'wb').write(r.content)
     if details:
         print("> Download complete! Restarting...")
-    os.execv(sys.executable, ['python'] + sys.argv)
+    os.system("python main.py")
+    sys.exit(1)
 
 
 print(
