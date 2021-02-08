@@ -14,7 +14,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/i/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://routinehubpy.tk/style.css" />
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -43,27 +42,6 @@
             }
             else {
                 document.getElementById('update').innerHTML = ``
-            }
-        const forcedownload = queryString.get('forcedownload');
-            if (forcedownload) {
-                    $(function() {
-                        $('a[data-auto-download]').each(function () {
-                            var $this = $("https://routinehubpy.tk/routinehub.py");
-                            setTimeout(function () {
-                                window.location = $this.attr('href');
-                            }, 2000);
-                        });
-                });
-                document.getElementById('update').innerHTML = `
-<meta http-equiv="refresh" content="0; url=https://routinehubpy.tk/routinehub.py">
-<h1>If the download did not start, please click on the download button below</h1><hr>`
-            }
-            else {
-                document.getElementById('update').innerHTML = ``
-            }
-
-            function thanksDownload() {
-                window.location.href = "/index?download=True";
             }
     </script>
 </body>
