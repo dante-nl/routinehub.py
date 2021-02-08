@@ -14,6 +14,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/i/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://routinehubpy.tk/style.css" />
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -38,7 +39,24 @@
 
         const update = queryString.get('update');
             if (update) {
-                document.getElementById('update').innerHTML = `<a class="download" href="/routinehub.py" download>Download update</a><h2>You can delete the old file</h2><hr>`
+                document.getElementById('update').innerHTML = `<a class="download" href="/routinebot.py" download>Download update</a><h2>You can delete the old file</h2><hr>`
+            }
+            else {
+                document.getElementById('update').innerHTML = ``
+            }
+        const forcedownload = queryString.get('forcedownload');
+            if (forcedownload) {
+                    $(function() {
+                        $('a[data-auto-download]').each(function () {
+                            var $this = $(/routinehub.py);
+                            setTimeout(function () {
+                                window.location = $this.attr('href');
+                            }, 2000);
+                        });
+                });
+                document.getElementById('update').innerHTML = `
+<meta http-equiv="refresh" content="0; url=https://routinehubpy.tk/routinehub.py">
+<h1>If the download did not start, please click on the download button below</h1><hr>`
             }
             else {
                 document.getElementById('update').innerHTML = ``
