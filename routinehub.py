@@ -17,7 +17,7 @@ import os
 
 print(" ")
 
-version = "1.2"
+version = "1.2.1"
 
 
 def connected(host='http://google.com'):
@@ -195,7 +195,8 @@ Hearts: {hearts}
             sys.exit(1)
         open('routinehub.py', 'wb').write(r.content)
         print("Download complete")
-        os.execv(sys.executable, ['python'] + sys.argv)
+        os.system("python routinehub.py")
+        sys.exit(1)
 
     elif txt == "exit":
         print("Goodbye!")
