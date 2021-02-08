@@ -1,5 +1,5 @@
 # routinehub.py - Made by dante_nl (https://rhub.tk?u=dante_nl)
-# Just a fun project. 
+# Just a fun project.
 
 # Why is this variable here named "Details"? It shows you what's going on!
 # These details are prefixed with ">".
@@ -8,21 +8,26 @@
 details = False
 
 # The real stuff starts here
-print(" ")
+
 import requests
 import sys
 import urllib
-import webbrowser
 import re
+import os
 
-version = "1.1"
+print(" ")
+
+version = "1.2"
+
 
 def connected(host='http://google.com'):
     try:
-        urllib.request.urlopen(host) 
+        urllib.request.urlopen(host)
         return True
     except:
         return False
+
+
 if connected() == False:
     print("No internet! This is a script to interact with a website, so it's not very useful without internet!")
     print(" ")
@@ -40,38 +45,24 @@ if not r.ok:
 
 data = r.json()
 if data.get('version') != version:
-    print(f"A new version is ready to be downloaded! Here are the release notes: \n{data.get('notes')}")
+    print("Update! You don't have to do anything; everything will be done automatically")
+    print(f"Release notes: \n{data.get('notes')}")
     print(f"{version} -> {data.get('version')}")
-    txt = input("Do you want to download the latest version (y, anything else to continue): ")
-    if details == True:
-        print(f"> Input received as {txt}")
-        print("File will be downloaded in the current directory. You need to restart this file to run it.")
-        if details:
-            print("> Getting file...")
-        url = 'https://routinehubpy.tk/routinehub.py'
-        r = requests.get(url, allow_redirects=True)
-        if not r.ok:
-            print("Could not connect!")
-            sys.exit(1)
-        open('routinehub.py', 'wb').write(r.content)
-        print("Download complete")
+    if details:
+        print("> Getting file...")
+    url = 'https://routinehubpy.tk/routinehub.py'
+    r = requests.get(url, allow_redirects=True)
+    if not r.ok:
+        print("Could not connect!")
         sys.exit(1)
+    open('routinehub.py', 'wb').write(r.content)
+    if details:
+        print("> Download complete! Restarting...")
+    os.execv(sys.executable, ['python'] + sys.argv)
 
-    if txt == "y":
-        url = "https://routinehubpy.tk?update=True"
-        webbrowser.open(url, new=1, autoraise=True)
-        print(" ")
-        sys.exit(1)
-    else:
-        latestversion = "You are not on the latest version. Restart to update"
-        print(" ")
-else:
-    latestversion = "You are on the latest version!"
 
 print(
-    f"Hi! Welcome to RoutineHub.py! | Type 'help' to get some help. ALL COMMANDS ARE LOWERCASE! | {latestversion}")
-def new_func():
-    return
+    f"Hi! Welcome to RoutineHub.py! | Type 'help' to get some help. ALL COMMANDS ARE LOWERCASE!")
 
 while True:
     txt = input("What do you want to do? ")
@@ -107,7 +98,8 @@ Here are a few things that work with me:
 
             if details:
                 print("> Requesting data from official API...")
-            r = requests.get(f'https://routinehub.co/api/v1/shortcuts/{txt}/versions/latest')
+            r = requests.get(
+                f'https://routinehub.co/api/v1/shortcuts/{txt}/versions/latest')
             if not r.ok:
                 print('No connection could be made.')
 
@@ -129,8 +121,6 @@ Latest version: {version}
 Release notes:\n{notes}\n
 Released on {release}           
 """)
-
-
 
         except:
             print(f"{txt} does not appear to be a valid ID!")
@@ -194,7 +184,7 @@ Hearts: {hearts}
 """)
 
     elif txt == "restore":
-        print("File will be downloaded in the current directory. You need to restart this file to run it.")
+        print("File will be downloaded in the current directory. It will restart automatically")
         if details:
             print("> Getting file...")
         url = 'https://routinehubpy.tk/routinehub.py'
@@ -204,7 +194,7 @@ Hearts: {hearts}
             sys.exit(1)
         open('routinehub.py', 'wb').write(r.content)
         print("Download complete")
-        sys.exit(1)
+        os.execv(sys.executable, ['python'] + sys.argv)
 
     elif txt == "exit":
         print("Goodbye!")
