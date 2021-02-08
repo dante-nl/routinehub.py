@@ -1,4 +1,4 @@
 {
-	"version": "1.2",
-	"notes": "- Updated the updater so you don't have to visit the website anymore"
+	"version": "1.2.1",
+	"notes": "- Fixed the broken updater"
 }
