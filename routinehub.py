@@ -13,8 +13,9 @@ import requests
 import sys
 import urllib
 import webbrowser
+import re
 
-version = "1.0.1"
+version = "1.1"
 
 def connected(host='http://google.com'):
     try:
@@ -127,26 +128,48 @@ Released on {release}
         if details:
             print("> Requesting data from alombi's API...")
         r = requests.get(f'https://rh-api.alombi.xyz/author?username={txt}')
+        if details:
+            print("> Scraping data from RoutineHub website")
+        user_url = f"https://routinehub.co/user/{txt}"
+        response = requests.get(user_url)
         if not r.ok:
             print('No connection could be made.')
             sys.exit(1)
         try:
             data = r.json()
+
             bio = data.get('bio')
-            total_shortcuts = data.get('total_shortcuts')
             total_downloads = data.get('total_downloads')
-            total_hearts = data.get('total_hearts')
             downloads_average = data.get('downloads_average')
-            heart_average = data.get('hearts_average')
-            username = data.get('username')
+
+            # Hearts
+
+            ex = '(?<=<i class="fas fa-heart"></i></span>\n).*(?=\n</small>)'
+            hearts_list = re.findall(ex, response.text)
+
+            hearts = 0
+
+            for num in hearts_list:
+                num = int(num)
+                hearts += num
+
+            # Shortcuts
+
+            ex = "(?<=<p>Shortcuts: ).*(?=</p>)"
+            sc = re.findall(ex, response.text)[0]
+
+            # Username
+
+            ex = "(?<=<strong>).*(?=</strong>)"
+            username = re.findall(ex, response.text)[0]
+
             print(f"""
-Username: @{username}
+Username: {username}
 Biography: {bio}
-Shortcuts: {total_shortcuts} | Due to a bug in the API, the total is only from the first page, so 18 maximum.
+Shortcuts: {sc}
 Downloads: {total_downloads}
 Average downloads: {downloads_average}
-Hearts: {total_hearts}
-Average hearts: {heart_average}
+Hearts: {hearts}
 """)
         except:
             print("No user with that name could be foud!")
@@ -154,6 +177,7 @@ Average hearts: {heart_average}
     elif txt == "credits":
         print("""
 - @alombi - Used his API for this script
+- @elio27 - Used parts of his RoutineBot code for the author part
 """)
 
     elif txt == "exit":
