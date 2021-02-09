@@ -17,7 +17,7 @@ import os
 
 print(" ")
 
-version = "1.2.1"
+version = "1.3"
 
 
 def connected(host='http://google.com'):
@@ -76,6 +76,7 @@ Here are a few things that work with me:
 - 'author'   - Lookup an author
 - 'credits'  - Shows the credits
 - 'restore'  - Redownloads the current routinehub.py. Can be useful when you did an oopsie whilst editing it
+- 'restart'  - If you did some changes while coding, you can just type this
 - 'exit'     - Stop this code
 """)
     elif txt == "shortcut":
@@ -96,6 +97,8 @@ Here are a few things that work with me:
 
             hearts = data.get('hearts')
             downloads = data.get('downloads')
+            name = data.get('name')
+            subtitle = data.get('subtitle')
 
             if details:
                 print("> Requesting data from official API...")
@@ -116,6 +119,8 @@ Here are a few things that work with me:
                 release = data.get('Release')
 
             print(f"""
+Name: {name}
+Subtitle: {subtitle}
 Hearts: {hearts}
 Downloads: {downloads}
 Latest version: {version}
@@ -195,6 +200,11 @@ Hearts: {hearts}
             sys.exit(1)
         open('routinehub.py', 'wb').write(r.content)
         print("Download complete")
+        os.system("python routinehub.py")
+        sys.exit(1)
+
+    elif txt == "restart":
+        print("Restarting...")
         os.system("python routinehub.py")
         sys.exit(1)
 
