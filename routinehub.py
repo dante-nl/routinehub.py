@@ -17,7 +17,7 @@ import os
 
 print(" ")
 
-version = "1.3"
+version = "1.4"
 
 
 def connected(host='http://google.com'):
@@ -58,7 +58,7 @@ if data.get('version') != version:
     open('routinehub.py', 'wb').write(r.content)
     if details:
         print("> Download complete! Restarting...")
-    os.system("python routinehub.py")
+    os.system("python3 routinehub.py")
     sys.exit(1)
 
 
@@ -200,12 +200,12 @@ Hearts: {hearts}
             sys.exit(1)
         open('routinehub.py', 'wb').write(r.content)
         print("Download complete")
-        os.system("python routinehub.py")
+        os.system("python3 routinehub.py")
         sys.exit(1)
 
     elif txt == "restart":
         print("Restarting...")
-        os.system("python routinehub.py")
+        os.system("python3 routinehub.py")
         sys.exit(1)
 
     elif txt == "exit":
