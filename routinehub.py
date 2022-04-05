@@ -17,7 +17,7 @@ import os
 
 print(" ")
 
-version = "1.3.1"
+version = "1.3.2"
 
 
 def connected(host='https://google.com'):
