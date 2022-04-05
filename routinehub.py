@@ -20,7 +20,7 @@ print(" ")
 version = "1.3.1"
 
 
-def connected(host='http://google.com'):
+def connected(host='https://google.com'):
     try:
         urllib.request.urlopen(host)
         return True
@@ -36,7 +36,7 @@ if connected() == False:
 if details == True:
     print("> Checking for updates...")
 
-r = requests.get('https://routinehubpy.tk/u/latest.json')
+r = requests.get('https://routinehubpy.dantenl.tk/u/latest.json')
 
 if not r.ok:
     print('No connection could be made.')
@@ -50,7 +50,7 @@ if data.get('version') != version:
     print(f"{version} -> {data.get('version')}")
     if details:
         print("> Getting file...")
-    url = 'https://routinehubpy.tk/routinehub.py'
+    url = 'https://routinehubpy.dantenl.tk/routinehub.py'
     r = requests.get(url, allow_redirects=True)
     if not r.ok:
         print("Could not connect!")
@@ -193,7 +193,7 @@ Hearts: {hearts}
         print("File will be downloaded in the current directory. It will restart automatically")
         if details:
             print("> Getting file...")
-        url = 'https://routinehubpy.tk/routinehub.py'
+        url = 'https://routinehubpy.dantenl.tk/routinehub.py'
         r = requests.get(url, allow_redirects=True)
         if not r.ok:
             print("Could not connect!")
