@@ -17,7 +17,7 @@ import os
 
 print(" ")
 
-version = "1.3.2"
+version = "1.3.3"
 
 
 def connected(host='https://google.com'):
@@ -36,7 +36,7 @@ if connected() == False:
 if details == True:
     print("> Checking for updates...")
 
-r = requests.get('https://routinehubpy.dantenl.tk/u/latest.json')
+r = requests.get('https://routinehubpy.netlify.app/u/latest.json')
 
 if not r.ok:
     print('No connection could be made.')
@@ -50,7 +50,7 @@ if data.get('version') != version:
     print(f"{version} -> {data.get('version')}")
     if details:
         print("> Getting file...")
-    url = 'https://routinehubpy.dantenl.tk/routinehub.py'
+    url = 'https://routinehubpy.netlify.app/routinehub.py'
     r = requests.get(url, allow_redirects=True)
     if not r.ok:
         print("Could not connect!")
