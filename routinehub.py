@@ -5,7 +5,7 @@
 # These details are prefixed with ">".
 # If you want to enable it, just replace "False" with "True"!
 
-details = True
+details = False
 
 # The real stuff starts here
 
@@ -148,7 +148,7 @@ Released on {release}
         if details:
             print("> Scraping data from RoutineHub website")
         user_url = f"https://routinehub.co/user/{txt}"
-        response = requests.get(user_url, headers=REQUEST_HEADERS, headers=REQUEST_HEADERS)
+        response = requests.get(user_url, headers=REQUEST_HEADERS)
         if not r.ok:
             print('No connection could be made.')
             sys.exit(1)
