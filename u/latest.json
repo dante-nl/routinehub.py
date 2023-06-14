@@ -1,4 +1,4 @@
 {
-	"version": "1.3.3",
-	"notes": "- Fixed URLs, now it works again"
+	"version": "1.3.4",
+	"notes": "- Fixed cache \n - Fixed Routinehub requests"
 }
