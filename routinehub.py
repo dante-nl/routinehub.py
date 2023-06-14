@@ -5,7 +5,7 @@
 # These details are prefixed with ">".
 # If you want to enable it, just replace "False" with "True"!
 
-details = False
+details = True
 
 # The real stuff starts here
 
@@ -15,9 +15,15 @@ import urllib
 import re
 import os
 
+REQUEST_HEADERS = {
+    "User-Agent": "routinehubpy",
+    "Cache-Control": "no-cache",
+   	"Expires": "0"
+}
+
 print(" ")
 
-version = "1.3.3"
+version = "1.3.4"
 
 
 def connected(host='https://google.com'):
@@ -36,7 +42,7 @@ if connected() == False:
 if details == True:
     print("> Checking for updates...")
 
-r = requests.get('https://routinehubpy.netlify.app/u/latest.json')
+r = requests.get('https://routinehubpy.netlify.app/u/latest.json', headers=REQUEST_HEADERS)
 
 if not r.ok:
     print('No connection could be made.')
@@ -51,7 +57,7 @@ if data.get('version') != version:
     if details:
         print("> Getting file...")
     url = 'https://routinehubpy.netlify.app/routinehub.py'
-    r = requests.get(url, allow_redirects=True)
+    r = requests.get(url, allow_redirects=True, headers=REQUEST_HEADERS)
     if not r.ok:
         print("Could not connect!")
         sys.exit(1)
@@ -89,7 +95,8 @@ Here are a few things that work with me:
             if details:
                 print(f"> {txt} appears to be a number")
                 print("> Requesting data from alombi's API...")
-            r = requests.get(f'https://rh-api.alombi.xyz/shortcut?id={txt}')
+            r = requests.get(
+                f'https://rh-api.alombi.xyz/shortcut?id={txt}', headers=REQUEST_HEADERS)
             if not r.ok:
                 print('No connection could be made.')
 
@@ -103,7 +110,7 @@ Here are a few things that work with me:
             if details:
                 print("> Requesting data from official API...")
             r = requests.get(
-                f'https://routinehub.co/api/v1/shortcuts/{txt}/versions/latest')
+                f'https://routinehub.co/api/v1/shortcuts/{txt}/versions/latest', headers=REQUEST_HEADERS)
             if not r.ok:
                 print('No connection could be made.')
 
@@ -136,11 +143,12 @@ Released on {release}
         txt = input("What is the author you want to look up? ")
         if details:
             print("> Requesting data from alombi's API...")
-        r = requests.get(f'https://rh-api.alombi.xyz/author?username={txt}')
+        r = requests.get(
+            f'https://rh-api.alombi.xyz/author?username={txt}', headers=REQUEST_HEADERS)
         if details:
             print("> Scraping data from RoutineHub website")
         user_url = f"https://routinehub.co/user/{txt}"
-        response = requests.get(user_url)
+        response = requests.get(user_url, headers=REQUEST_HEADERS, headers=REQUEST_HEADERS)
         if not r.ok:
             print('No connection could be made.')
             sys.exit(1)
@@ -194,7 +202,7 @@ Hearts: {hearts}
         if details:
             print("> Getting file...")
         url = 'https://routinehubpy.dantenl.tk/routinehub.py'
-        r = requests.get(url, allow_redirects=True)
+        r = requests.get(url, allow_redirects=True, headers=REQUEST_HEADERS)
         if not r.ok:
             print("Could not connect!")
             sys.exit(1)
